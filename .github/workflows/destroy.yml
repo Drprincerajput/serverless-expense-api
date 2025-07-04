@@ -1,12 +1,7 @@
-name: Destroy Terraform Environment
+name: Destroy Current Terraform Infra
 
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: "Environment to destroy (dev or prod)"
-        required: true
-        default: "dev"
+  workflow_dispatch:  # Manual trigger from GitHub UI
 
 jobs:
   destroy:
@@ -16,7 +11,7 @@ jobs:
       AWS_REGION: us-east-1
 
     steps:
-    - name: Checkout code
+    - name: Checkout repo
       uses: actions/checkout@v4
 
     - name: Configure AWS credentials
@@ -26,19 +21,8 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
 
-    - name: Set Terraform backend config
-      run: |
-        if [[ "${{ github.event.inputs.environment }}" == "dev" ]]; then
-          cp infra/backend-dev.tf infra/backend.tf
-        elif [[ "${{ github.event.inputs.environment }}" == "prod" ]]; then
-          cp infra/backend-prod.tf infra/backend.tf
-        else
-          echo "Invalid environment. Use 'dev' or 'prod'."
-          exit 1
-        fi
-
     - name: Terraform destroy
       run: |
         cd infra
         terraform init -reconfigure
-        terraform destroy -var-file=../${{ github.event.inputs.environment }}/terraform.tfvars -auto-approve
+        terraform destroy -auto-approve
