@@ -1,0 +1,30 @@
+# Terraform state files (never commit these)
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+
+# Terraform backend bootstrap state
+bootstrap/terraform.tfstate
+bootstrap/terraform.tfstate.*
+
+# Lambda zip package (generated during CI/CD)
+lambda.zip
+
+# Python cache and virtual envs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env/
+.venv/
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# VSCode settings (if using VSCode)
+.vscode/
+
+# Logs
+*.log
