@@ -25,6 +25,8 @@ Everything is automated — from infrastructure provisioning to Lambda deploymen
 
 ## 🗂️ Project Structure
 
+---
+
 serverless-expense-api/
 ├── bootstrap/ # Terraform code to create backend (S3 + DynamoDB)
 ├── infra/ # Terraform code for AWS infra (API Gateway, Lambda, DynamoDB)
@@ -32,10 +34,6 @@ serverless-expense-api/
 ├── .github/workflows/ # GitHub Actions for deploy + destroy
 ├── dev/terraform.tfvars # Dev env vars (optional)
 ├── prod/terraform.tfvars # Prod env vars (optional)
-
-yaml
-Copy
-Edit
 
 ---
 
@@ -56,9 +54,6 @@ GET /expenses – Get all expenses
 🛠️ Deployment Instructions
 
 1. Bootstrap the Terraform Backend
-bash
-Copy
-Edit
 cd bootstrap
 terraform init
 terraform apply -auto-approve
@@ -69,9 +64,6 @@ S3 bucket to store state
 DynamoDB table for state locking
 
 1. Deploy the Infra
-bash
-Copy
-Edit
 cd infra
 terraform init -backend-config=../bootstrap/backend.tf
 terraform apply -auto-approve
@@ -84,7 +76,7 @@ DynamoDB table
 API Gateway
 
 1. Test the API
-Use curl or Postman to hit the API.
+Use curl
 
 ⚙️ CI/CD with GitHub Actions
 Lambda Deployment Workflow
@@ -100,16 +92,10 @@ Destroys all Terraform-managed AWS infra
 🧹 Clean Up
 To destroy infra:
 
-bash
-Copy
-Edit
 cd infra
 terraform destroy -auto-approve
 To destroy the backend (S3 + DynamoDB):
 
-bash
-Copy
-Edit
 cd bootstrap
 terraform destroy -auto-approve
 If the S3 bucket is versioned, empty it manually or use force_destroy = true.
