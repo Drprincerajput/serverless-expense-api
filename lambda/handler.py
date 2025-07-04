@@ -35,7 +35,7 @@ def add_expense(event):
 
         item = {
             "id": expense_id,
-            "amount": Decimal(str(body.get("amount"))),  # Convert to Decimal for DynamoDB
+            "amount": Decimal(str(body.get("amount"))),
             "category": body.get("category"),
             "timestamp": datetime.utcnow().isoformat()
         }
