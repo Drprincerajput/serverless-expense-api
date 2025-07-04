@@ -28,3 +28,7 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Ensure secrets.tfvars or any AWS keys are never committed
+*.tfvars
+*.env
