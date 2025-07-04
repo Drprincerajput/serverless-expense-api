@@ -32,5 +32,5 @@ jobs:
       - name: Deploy Lambda function
         run: |
           aws lambda update-function-code \
-            --function-name expense_handler \
+            --function-name expense-handler \
             --zip-file fileb://lambda.zip
