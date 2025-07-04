@@ -13,24 +13,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Zip Lambda function
-      run: |
-        cd lambda
-        zip -r ../lambda.zip .
-        cd ..
+      - name: Zip Lambda function
+        run: |
+          cd lambda
+          zip -r ../lambda.zip .
+          cd ..
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v4
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: us-east-1
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
-    - name: Deploy Lambda function
-      run: |
-        aws lambda update-function-code \
-          --function-name expense_handler \
-          --zip-file fileb://lambda.zip
+      - name: Deploy Lambda function
+        run: |
+          aws lambda update-function-code \
+            --function-name expense_handler \
+            --zip-file fileb://lambda.zip
