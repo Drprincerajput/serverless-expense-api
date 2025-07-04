@@ -23,9 +23,9 @@ Everything is automated — from infrastructure provisioning to Lambda deploymen
 
 ---
 
-## 🗂️ Project Structure
-
 ---
+
+## 🗂️ Project Structure
 
 serverless-expense-api/
 ├── bootstrap/ # Terraform code to create backend (S3 + DynamoDB)
