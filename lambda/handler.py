@@ -4,15 +4,15 @@ import uuid
 from datetime import datetime
 from decimal import Decimal
 
-# Initialize DynamoDB resource and table
-dynamodb = boto3.resource("dynamodb")
-table = dynamodb.Table("expenses")  # Table name must match what's created in Terraform
 
-# Custom JSON encoder to handle Decimal types from DynamoDB
+dynamodb = boto3.resource("dynamodb")
+table = dynamodb.Table("expenses")
+
+
 class DecimalEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, Decimal):
-            return float(obj)  # or int(obj) if you only expect integers
+            return float(obj)
         return super(DecimalEncoder, self).default(obj)
 
 def lambda_handler(event, context):
